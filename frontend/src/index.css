@@ -1,0 +1,245 @@
+:root {
+  --bg-start: #f5f8ff;
+  --bg-mid: #f8fafc;
+  --bg-end: #ffffff;
+  --text-main: #0f172a;
+  --card-bg: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --elevated-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+  --elevated-shadow-hover: 0 16px 34px rgba(15, 23, 42, 0.18);
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+  color: var(--text-main);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.brand-gradient {
+  background: linear-gradient(90deg, #0d6efd 0%, #6610f2 100%);
+}
+
+.hero-panel {
+  border: 0;
+  border-radius: 1rem;
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(13, 110, 253, 0.22);
+}
+
+.hero-glow-circle {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  filter: blur(2px);
+}
+
+.hero-glow-1 {
+  top: -38px;
+  right: 18%;
+}
+
+.hero-glow-2 {
+  bottom: -70px;
+  right: -26px;
+}
+
+.elevated-card {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: var(--elevated-shadow);
+  background-color: var(--card-bg);
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+}
+
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.product-card-reflect {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.product-card-reflect::after {
+  content: "";
+  position: absolute;
+  inset: auto 7% -16px 7%;
+  height: 30px;
+  background: radial-gradient(ellipse at center, rgba(13, 110, 253, 0.28) 0%, rgba(13, 110, 253, 0) 75%);
+  filter: blur(9px);
+  transition: opacity 0.35s ease;
+  opacity: 0.3;
+}
+
+.product-card-reflect:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--elevated-shadow-hover);
+}
+
+.product-card-reflect:hover::after {
+  opacity: 0.85;
+}
+
+.product-image {
+  transition: transform 0.55s ease;
+}
+
+.product-card-reflect:hover .product-image {
+  transform: scale(1.05);
+}
+
+.image-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.35) 48%, rgba(255, 255, 255, 0) 68%);
+  transform: translateX(-120%);
+  transition: transform 0.8s ease;
+}
+
+.product-card-reflect:hover .image-shine {
+  transform: translateX(120%);
+}
+
+.card-enter {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  animation: cardFadeUp 0.6s ease forwards;
+}
+
+@keyframes cardFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.product-image-card {
+  width: 100%;
+  height: clamp(210px, 24vw, 240px);
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+  padding: 0.5rem;
+}
+
+.product-image-detail {
+  width: 100%;
+  height: clamp(280px, 34vw, 380px);
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+}
+
+.product-image-frame {
+  background: linear-gradient(180deg, #f8fbff 0%, #eef3ff 100%);
+  min-height: 220px;
+}
+
+.product-image-detail-frame {
+  background: linear-gradient(180deg, #f8fbff 0%, #eef3ff 100%);
+  border: 1px solid rgba(13, 110, 253, 0.12);
+}
+
+.product-image-preview {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+}
+
+.product-image-admin-thumb {
+  width: 96px;
+  height: 64px;
+  object-fit: cover;
+}
+
+.auth-card {
+  overflow: hidden;
+  position: relative;
+}
+
+.auth-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 8% 8%, rgba(13, 110, 253, 0.08), transparent 42%);
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-start: #0b1222;
+    --bg-mid: #0f172a;
+    --bg-end: #111827;
+    --text-main: #e2e8f0;
+    --card-bg: #0f172a;
+    --glass-bg: rgba(15, 23, 42, 0.72);
+    --elevated-shadow: 0 12px 28px rgba(2, 6, 23, 0.45);
+    --elevated-shadow-hover: 0 20px 36px rgba(2, 6, 23, 0.62);
+  }
+
+  .hero-glow-circle {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .table {
+    --bs-table-bg: #0f172a;
+    --bs-table-color: #e2e8f0;
+    --bs-table-border-color: #1e293b;
+    --bs-table-striped-bg: #111b31;
+  }
+
+  .table-light {
+    --bs-table-bg: #172338;
+    --bs-table-color: #e2e8f0;
+  }
+
+  .product-image-card,
+  .product-image-detail {
+    background: #0b1220;
+  }
+
+  .product-image-frame,
+  .product-image-detail-frame {
+    background: linear-gradient(180deg, #0f172a 0%, #0b1220 100%);
+    border-color: rgba(148, 163, 184, 0.18);
+  }
+
+  .form-control,
+  .form-select {
+    background-color: #0b1220;
+    color: #e2e8f0;
+    border-color: #243244;
+  }
+
+  .form-control::placeholder {
+    color: #94a3b8;
+  }
+
+  .btn-outline-secondary {
+    color: #cbd5e1;
+    border-color: #475569;
+  }
+}
