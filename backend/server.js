@@ -8,7 +8,10 @@ connectDB();     // connect database
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://ecommerce-website-henna-one.vercel.app/",
+  credentials: true
+}));
 app.use(express.json());
 app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/users", require("./routes/userRoutes"));
