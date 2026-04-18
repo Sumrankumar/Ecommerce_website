@@ -11,7 +11,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://vercel.com/sumrankumars-projects/ecommerce-website"
+    "https://ecommerce-website-henna-one.vercel.app"
   ],
   credentials: true
 }));
