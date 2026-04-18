@@ -9,7 +9,10 @@ connectDB();     // connect database
 const app = express();
 
 app.use(cors({
-  origin: "https://ecommerce-website-henna-one.vercel.app/",
+  origin: [
+    "http://localhost:5173",
+    "https://vercel.com/sumrankumars-projects/ecommerce-website"
+  ],
   credentials: true
 }));
 app.use(express.json());
