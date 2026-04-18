@@ -8,13 +8,16 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import './index.css'
 import App from './App.jsx'
 import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
-        <Toaster position="top-right" />
+        <CartProvider>
+          <App />
+          <Toaster position="top-right" />
+        </CartProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>,

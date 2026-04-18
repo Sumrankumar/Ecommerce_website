@@ -6,11 +6,35 @@ const orderSchema = new mongoose.Schema({
     ref: "User"
   },
 
+  shippingAddress: {
+    fullName: { type: String, default: "" },
+    email: { type: String, default: "" },
+    phone: { type: String, default: "" },
+    addressLine1: { type: String, default: "" },
+    addressLine2: { type: String, default: "" },
+    city: { type: String, default: "" },
+    state: { type: String, default: "" },
+    postalCode: { type: String, default: "" },
+    country: { type: String, default: "India" }
+  },
+
   products: [
     {
       product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product"
+      },
+      name: {
+        type: String,
+        default: ""
+      },
+      price: {
+        type: Number,
+        default: 0
+      },
+      image: {
+        type: String,
+        default: ""
       },
       quantity: {
         type: Number,
@@ -37,8 +61,13 @@ const orderSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    enum: ["pending", "shipped", "delivered"],
+    enum: ["pending", "shipped", "delivered", "canceled"],
     default: "pending"
+  },
+
+  stockAdjusted: {
+    type: Boolean,
+    default: false
   }
 
 }, { timestamps: true });

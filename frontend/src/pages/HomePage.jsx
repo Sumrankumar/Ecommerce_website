@@ -5,7 +5,7 @@ import ErrorAlert from "../components/ErrorAlert";
 import { getProducts } from "../services/productService";
 import { getErrorMessage } from "../utils/helpers";
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 12;
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -108,9 +108,9 @@ const HomePage = () => {
         </p>
       )}
 
-      <div className="row g-4">
+      <div className="row g-3">
         {paginatedProducts.map((product, idx) => (
-          <div className="col-md-6 col-lg-4" key={product._id}>
+          <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={product._id}>
             <ProductCard product={product} index={idx} />
           </div>
         ))}

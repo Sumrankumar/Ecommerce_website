@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 import { formatCurrency } from "../utils/helpers";
+import { useCart } from "../context/CartContext";
 
 const ProductCard = ({ product, index = 0 }) => {
+  const { addItem } = useCart();
+
+  const handleAddToCart = () => {
+    addItem(product, 1);
+    toast.success("Added to cart");
+  };
+
   return (
     <div
       className="card h-100 elevated-card product-card-reflect border-0 card-enter"
@@ -20,19 +29,31 @@ const ProductCard = ({ product, index = 0 }) => {
         <span className="badge text-bg-primary-subtle text-primary-emphasis align-self-start mb-2 rounded-pill px-3 py-2">
           {product.category || "General"}
         </span>
-        <h5 className="card-title fw-bold">{product.name}</h5>
-        <p className="card-text text-secondary flex-grow-1">
+        <h6 className="card-title fw-bold mb-2">{product.name}</h6>
+        <p className="card-text text-secondary flex-grow-1 small mb-0">
           {product.description || "No description available."}
         </p>
       </div>
-      <div className="card-footer bg-white border-0 d-flex align-items-center justify-content-between pb-4 pt-0 px-3">
-        <p className="h5 mb-0 fw-bold text-dark">{formatCurrency(product.price)}</p>
-        <Link
-          to={`/products/${product._id}`}
-          className="btn btn-primary btn-sm px-3 rounded-pill"
-        >
-          View
-        </Link>
+      <div className="card-footer bg-white border-0 pb-3 pt-0 px-3">
+        <p className="mb-2 fw-bold text-dark">{formatCurrency(product.price)}</p>
+        <div className="d-grid" style={{ gridTemplateColumns: "1fr 1fr", gap: "0.4rem" }}>
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            disabled={typeof product.stock === "number" ? product.stock <= 0 : false}
+            className="btn btn-outline-primary btn-sm py-2 px-1 text-truncate"
+            title="Add to Cart"
+          >
+            Add to Cart
+          </button>
+          <Link
+            to={`/products/${product._id}`}
+            className="btn btn-primary btn-sm py-2 px-1 text-truncate"
+            title="View Details"
+          >
+            View
+          </Link>
+        </div>
       </div>
     </div>
   );

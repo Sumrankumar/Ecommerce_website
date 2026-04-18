@@ -138,7 +138,7 @@ body {
 
 .product-image-card {
   width: 100%;
-  height: clamp(210px, 24vw, 240px);
+  height: clamp(140px, 16vw, 170px);
   object-fit: contain;
   object-position: center;
   background: #fff;
@@ -155,7 +155,7 @@ body {
 
 .product-image-frame {
   background: linear-gradient(180deg, #f8fbff 0%, #eef3ff 100%);
-  min-height: 220px;
+  min-height: 160px;
 }
 
 .product-image-detail-frame {

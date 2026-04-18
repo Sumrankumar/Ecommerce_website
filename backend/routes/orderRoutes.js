@@ -5,6 +5,7 @@ const {
   createOrder,
   payOrder, //  added
   getMyOrders,
+  getMyOrderById,
   getAllOrders,
   getUndelivered,
   getDelivered,
@@ -16,6 +17,7 @@ const { protect, adminOnly } = require("../middleware/authMiddleware");
 //  User
 router.post("/", protect, createOrder);
 router.get("/my", protect, getMyOrders);
+router.get("/my/:id", protect, getMyOrderById);
 
 //  Payment
 router.post("/pay/:id", protect, payOrder); // ✅ NEW ROUTE

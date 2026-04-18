@@ -10,6 +10,11 @@ export const getMyOrders = async () => {
   return data;
 };
 
+export const getMyOrderById = async (id) => {
+  const { data } = await api.get(`/orders/my/${id}`);
+  return data;
+};
+
 export const getAllOrders = async () => {
   const { data } = await api.get("/orders");
   return data;

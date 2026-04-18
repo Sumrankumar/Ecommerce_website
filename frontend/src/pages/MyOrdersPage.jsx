@@ -50,19 +50,27 @@ const MyOrdersPage = () => {
             <div className="mt-3 flex flex-wrap gap-2">
               {order.products?.map((item) => (
                 <span key={item._id} className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">
-                  {item.product?.name || "Product"} x {item.quantity}
+                  {item.product?.name || item.name || "Product"} x {item.quantity}
                 </span>
               ))}
             </div>
-            {!order.isPaid && order.paymentMethod !== "COD" ? (
+            <div className="mt-3 d-flex flex-wrap gap-2">
               <Link
-                to={`/payment/${order._id}`}
-                state={{ order }}
-                className="mt-3 inline-block rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700"
+                to={`/my-orders/${order._id}`}
+                className="btn btn-outline-primary btn-sm"
               >
-                Complete Payment
+                View details
               </Link>
-            ) : null}
+              {!order.isPaid && order.paymentMethod !== "COD" ? (
+                <Link
+                  to={`/payment/${order._id}`}
+                  state={{ order }}
+                  className="btn btn-primary btn-sm"
+                >
+                  Complete Payment
+                </Link>
+              ) : null}
+            </div>
           </div>
         ))}
       </div>

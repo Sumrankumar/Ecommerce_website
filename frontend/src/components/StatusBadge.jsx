@@ -2,6 +2,7 @@ const statusClassMap = {
   pending: "text-bg-warning",
   shipped: "text-bg-info",
   delivered: "text-bg-success",
+  canceled: "text-bg-danger",
 };
 
 const StatusBadge = ({ status = "pending" }) => {

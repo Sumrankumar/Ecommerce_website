@@ -1,5 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 
 const linkClass = ({ isActive }) =>
   `nav-link fw-semibold ${
@@ -8,6 +9,7 @@ const linkClass = ({ isActive }) =>
 
 const Navbar = () => {
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
+  const { itemsCount } = useCart();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -40,11 +42,19 @@ const Navbar = () => {
             <NavLink to="/" className={linkClass}>
               Home
             </NavLink>
-            {isAuthenticated && (
-              <NavLink to="/my-orders" className={linkClass}>
-                My Orders
-              </NavLink>
-            )}
+            {isAuthenticated && !isAdmin ? (
+              <>
+                <NavLink to="/cart" className={linkClass}>
+                  Cart{" "}
+                  {itemsCount > 0 ? (
+                    <span className="badge text-bg-primary rounded-pill ms-1">{itemsCount}</span>
+                  ) : null}
+                </NavLink>
+                <NavLink to="/my-orders" className={linkClass}>
+                  My Orders
+                </NavLink>
+              </>
+            ) : null}
             {isAdmin && (
               <>
                 <NavLink to="/admin/dashboard" className={linkClass}>
