@@ -20,6 +20,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import AdminLayout from "./components/AdminLayout";
 
 const App = () => {
+  console.log(import.meta.env.VITE_API_BASE_URL);
   return (
     <div className="min-vh-100">
       <Navbar />
