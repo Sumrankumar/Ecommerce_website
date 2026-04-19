@@ -1,9 +1,15 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useAuth } from "./AuthContext";
 
 const CartContext = createContext(null);
 
-const CART_STORAGE_KEY = "cart";
+const guestCartStorageKey = "cart";
+
+const cartStorageKeyForUser = (user) => {
+  const id = user?._id || user?.id;
+  return id ? `cart:user:${id}` : guestCartStorageKey;
+};
 
 const safeParse = (value, fallback) => {
   try {
@@ -14,11 +20,26 @@ const safeParse = (value, fallback) => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [items, setItems] = useState(() => safeParse(localStorage.getItem(CART_STORAGE_KEY), []));
+  const { user } = useAuth();
+  const storageKey = cartStorageKeyForUser(user);
+
+  const [items, setItems] = useState(() => {
+    try {
+      const rawUser = localStorage.getItem("user");
+      const u = rawUser ? JSON.parse(rawUser) : null;
+      return safeParse(localStorage.getItem(cartStorageKeyForUser(u)), []);
+    } catch {
+      return safeParse(localStorage.getItem(guestCartStorageKey), []);
+    }
+  });
+
+  useEffect(() => {
+    setItems(safeParse(localStorage.getItem(storageKey), []));
+  }, [storageKey]);
 
   const persist = (next) => {
     setItems(next);
-    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(next));
+    localStorage.setItem(storageKey, JSON.stringify(next));
   };
 
   const addItem = (product, quantity = 1) => {
