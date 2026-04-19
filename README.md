@@ -7,6 +7,8 @@ FullStack E-Commerce website using MERN stack
 This is a complete full-stack e-commerce application built with the MERN stack (MongoDB, Express.js, React, Node.js), providing a robust platform for online shopping with both customer and admin functionalities.
 
 ---
+## 🚀 Live Demo
+[Visit Website](https://ecommerce-website-henna-one.vercel.app/)
 
 ## Project Structure
 
