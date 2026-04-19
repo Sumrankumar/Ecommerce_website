@@ -9,9 +9,7 @@ const RegisterPage = () => {
   const { register: registerUser } = useAuth();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { register, handleSubmit, formState } = useForm({
-    defaultValues: { role: "user" },
-  });
+  const { register, handleSubmit, formState } = useForm();
 
   const onSubmit = async (values) => {
     try {
@@ -51,19 +49,13 @@ const RegisterPage = () => {
             className="form-control"
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-12">
           <input
             type="password"
             placeholder="Password"
             {...register("password", { required: true, minLength: 6 })}
             className="form-control"
           />
-        </div>
-        <div className="col-md-6">
-          <select {...register("role")} className="form-select">
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
         </div>
         {Object.keys(formState.errors).length > 0 ? (
           <p className="text-danger small mb-0">All fields are required. Password must be at least 6 chars.</p>

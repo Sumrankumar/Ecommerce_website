@@ -188,7 +188,13 @@ const CheckoutPage = () => {
             </div>
             <div>
               <label className="mb-1 block text-sm font-medium text-slate-700">Phone *</label>
-              <input {...register("phone", { required: true })} className="w-full rounded-md border border-slate-300 px-3 py-2" />
+              <input
+                {...register("phone", {
+                  required: true,
+                  pattern: { value: /^\d{10}$/, message: "Mobile number must be 10 digits" },
+                })}
+                className="w-full rounded-md border border-slate-300 px-3 py-2"
+              />
             </div>
             <div className="md:col-span-2">
               <label className="mb-1 block text-sm font-medium text-slate-700">Email for receipt *</label>
@@ -216,7 +222,13 @@ const CheckoutPage = () => {
             </div>
             <div>
               <label className="mb-1 block text-sm font-medium text-slate-700">Postal code</label>
-              <input {...register("postalCode")} className="w-full rounded-md border border-slate-300 px-3 py-2" />
+              <input
+                {...register("postalCode", {
+                  required: true,
+                  pattern: { value: /^\d{6}$/, message: "Pincode must be 6 digits" },
+                })}
+                className="w-full rounded-md border border-slate-300 px-3 py-2"
+              />
             </div>
             <div>
               <label className="mb-1 block text-sm font-medium text-slate-700">Country</label>

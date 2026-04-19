@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/user");
 
 // Protect routes
 const protect = (req, res, next) => {
@@ -28,12 +29,23 @@ const protect = (req, res, next) => {
   }
 };
 
-// Admin only
-const adminOnly = (req, res, next) => {
-  if (!req.user || req.user.role !== "admin") {
-    return res.status(403).json({ message: "Admin only" });
+// Admin only — JWT proves identity; DB role is the source of truth for authorization
+const adminOnly = async (req, res, next) => {
+  try {
+    if (!req.user?.id) {
+      return res.status(401).json({ message: "Not authorized" });
+    }
+
+    const user = await User.findById(req.user.id).select("role");
+    if (!user || user.role !== "admin") {
+      return res.status(403).json({ message: "Admin only" });
+    }
+
+    req.user.role = user.role;
+    next();
+  } catch (err) {
+    res.status(500).json({ message: "Authorization check failed" });
   }
-  next();
 };
 
 module.exports = { protect, adminOnly };

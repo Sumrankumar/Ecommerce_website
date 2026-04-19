@@ -1,7 +1,8 @@
 import api from "./api";
 
 export const registerUser = async (payload) => {
-  const { data } = await api.post("/users/register", payload);
+  const { name, email, password } = payload;
+  const { data } = await api.post("/users/register", { name, email, password });
   return data;
 };
 
